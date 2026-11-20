@@ -1,0 +1,48 @@
+name: Compiler l'exécutable Windows
+
+# Se déclenche à chaque envoi sur la branche principale, à chaque création
+# de tag de version (ex: v1.0), ou manuellement depuis l'onglet "Actions"
+# de GitHub (bouton "Run workflow").
+on:
+  push:
+    branches: [main, master]
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Construire l'exécutable
+        run: pyinstaller --onefile --windowed --name GestionStock main.py
+
+      - name: Publier l'exécutable (téléchargeable depuis l'onglet Actions)
+        uses: actions/upload-artifact@v4
+        with:
+          name: GestionStock-windows
+          path: dist/GestionStock.exe
+
+      # Si le déclencheur est un tag de version (ex: v1.0), crée aussi une
+      # "Release" GitHub avec l'exécutable joint, plus facile à partager
+      # avec vos clients qu'un artifact d'Action.
+      - name: Créer une Release (uniquement sur un tag de version)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/GestionStock.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

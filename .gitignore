@@ -1,0 +1,25 @@
+# Base de données locale et fichiers générés à l'exécution
+gestion_pme.db
+*.db
+rapports_email.log
+pub_cache.json
+assets/
+factures/
+exports/
+
+# Construction PyInstaller
+build/
+dist/
+*.spec
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Éditeurs / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
