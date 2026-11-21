@@ -9,7 +9,9 @@ import json
 import os
 from datetime import date, datetime
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gestion_pme.db")
+from utils import dossier_donnees
+
+DB_PATH = os.path.join(dossier_donnees(), "gestion_pme.db")
 
 
 def get_connection():

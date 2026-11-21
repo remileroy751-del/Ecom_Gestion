@@ -19,7 +19,7 @@ from PIL import Image
 import database as db
 import facture
 import export
-from utils import fmt
+from utils import fmt, dossier_donnees
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("blue")
@@ -286,7 +286,7 @@ class App(ctk.CTk):
             logo_source = self._setup_data.get("logo_path")
             if logo_source:
                 try:
-                    dossier_assets = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+                    dossier_assets = os.path.join(dossier_donnees(), "assets")
                     os.makedirs(dossier_assets, exist_ok=True)
                     extension = os.path.splitext(logo_source)[1] or ".png"
                     destination = os.path.join(dossier_assets, f"logo{extension}")

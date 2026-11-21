@@ -10,9 +10,9 @@ import os
 import sys
 import subprocess
 
-from utils import fmt
+from utils import fmt, dossier_donnees
 
-DOSSIER_FACTURES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "factures")
+DOSSIER_FACTURES = os.path.join(dossier_donnees(), "factures")
 
 
 def construire_texte_facture(data):

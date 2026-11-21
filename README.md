@@ -139,6 +139,25 @@ technique côté client.
 Les factures sont enregistrées en texte simple dans `factures/` (impression
 via l'imprimante par défaut du système).
 
+## Désinstallation et nettoyage des fichiers résiduels
+
+Le logiciel stocke ses données **localement** sur l'ordinateur. Pour le
+retirer proprement :
+
+1. Fermez le logiciel, puis supprimez `GestionStock.exe` (et ses raccourcis).
+2. Lancez **`NettoyageGestionStock.exe`** : il liste ce qui reste sur le PC
+   (base de données, factures, logo, journaux, cache), propose une
+   **sauvegarde .zip** préalable, puis supprime le tout après confirmation.
+
+Emplacement des données :
+
+- version compilée (`.exe`) : `%LOCALAPPDATA%\GestionStock`
+- lancement depuis le code source : le dossier du projet (utilisez le bouton
+  « Ajouter un dossier… » du nettoyeur pour le cibler).
+
+Seuls des fichiers aux noms connus du logiciel sont supprimés. Les rapports
+PDF/Excel exportés sur le Bureau ne sont jamais touchés.
+
 ## Compiler via GitHub (sans PC Windows)
 
 Le dossier `.github/workflows/build-exe.yml` fourni compile automatiquement
